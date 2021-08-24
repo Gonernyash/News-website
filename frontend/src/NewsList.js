@@ -1,23 +1,49 @@
 import "./NewsList.css";
 import NewsItem from "./NewsItem";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import ContextData from "./Context/Data/ContextData";
 
 function NewsList() {
-    const {stateData} = useContext(ContextData);
+    const {stateData, dispatchData} = useContext(ContextData);
 
-    console.log(stateData);
+    useEffect(()=> {
+        try {
+            const fetchNews = async () => {
+                const res = await fetch("http://localhost:3004/news");
+                if (res.status === 200) {
+                    const result = await res.json();
+                    dispatchData({
+                        type: "FETCH_NEWS",
+                        payload: result
+                    });
+                }
+            }
+            fetchNews();
+        } catch(e) {
+            console.log(e);
+        }
+    }, [])
+
+    const handleData = (data) => {
+        const result = [];
+        data.news.forEach(newsGroup => {
+            const groupName = <h5>{newsGroup.date}</h5>;
+            result.push(groupName);
+            newsGroup.news.forEach(item => {
+                result.push(<NewsItem text={item.text} img={item.img_url} time={item.time} />);
+            })
+        });
+        return result;
+    }
+    
     return(
-        <div>
-            Новости
-            <NewsItem />
-            <NewsItem />
-            <NewsItem />
-            <NewsItem />
-            <NewsItem />
+        <div className="news-list">
+            {handleData(stateData)}
             <button className="news-list__load">Загрузить больше</button>
         </div>
     );
 }
+
+
 
 export default NewsList;

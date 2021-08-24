@@ -1,13 +1,13 @@
 import "./NewsItem.css";
 
-function NewsItem() {
+function NewsItem(props) {
     return(
         <div className="news-item">
             <p className="news-item__text">
-                Text
+                {props.text}
             </p>
-            <img className="news-item__img" src="https://via.placeholder.com/680x383" alt=""></img>
-            <div className="news-item__date">date</div>
+            <img className="news-item__img" src={props.img} alt=""></img>
+            <div className="news-item__time">{props.time}</div>
         </div>
     );
 }
