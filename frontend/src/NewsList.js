@@ -2,6 +2,7 @@ import "./NewsList.css";
 import NewsItem from "./NewsItem";
 import { useContext, useEffect } from "react";
 import ContextData from "./Context/Data/ContextData";
+import NET from "./network";
 
 function NewsList() {
     const {stateData, dispatchData} = useContext(ContextData);
@@ -9,7 +10,7 @@ function NewsList() {
     useEffect(()=> {
         try {
             const fetchNews = async () => {
-                const res = await fetch("http://localhost:3004/news");
+                const res = await fetch(`${NET.APP_URL}/news`);
                 if (res.status === 200) {
                     const result = await res.json();
                     dispatchData({
