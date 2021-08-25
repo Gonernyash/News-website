@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\News;
+use App\Http\Controllers\NewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,10 @@ use App\Models\News;
 //     return $request->user();
 // });
 
-Route::get('news', function() {
-    $news = News::all();
-    return $news;
-});
+// Route::get('news', function() {
+
+//     $news = News::all();
+//     return $news;
+// });
+
+Route::get('news', [NewsController::class, 'getNews']);
