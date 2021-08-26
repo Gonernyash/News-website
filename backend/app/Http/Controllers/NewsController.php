@@ -7,8 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
-    // Ограничение по кол-ву новостей за 1 запрос
-    const NEWS_COUNT = 5; 
+    
+    const NEWS_COUNT = 5; // Ограничение по кол-ву новостей за 1 запрос
+    const DATE_FORMAT = "%d.%m.%Y"; // Формат даты публикации новости
+    const TIME_FORMAT = "%H:%i"; // Формат времени публикации новости
 
     public static $news = [];
 
@@ -23,22 +25,26 @@ class NewsController extends Controller
 
         // Формируем запрос к БД
         /*
-        SELECT DATE(post_date) AS `date`, post_text AS text, post_img AS img_url, TIME(post_date) AS `time`
+        SELECT DATE_FORMAT(post_date, '$dateF') AS `date`, post_text AS text, post_img AS img_url, DATE_FORMAT(post_date, '$timeF') AS `time`
         FROM news
         WHERE `text` like %$req%
         ORDER BY post_date DESC
         OFFSET $skip
         LIMIT $self::NEWS_COUNT
         */
+
+        $dateF = self::DATE_FORMAT;
+        $timeF = self::TIME_FORMAT;
+
         $result = DB::table('news')
-        ->select(DB::raw("DATE(post_date) AS date"), "post_text AS text", "post_img AS img_url", DB::raw("TIME(post_date) AS time"))
+        ->select(DB::raw("DATE_FORMAT(post_date, '$dateF') AS date"), "post_text AS text", "post_img AS img_url", DB::raw("DATE_FORMAT(post_date, '$timeF') AS time"))
         ->where("post_text","like","%$req%")
         ->orderBy("post_date", "DESC")
         ->skip($skip)
         ->take(self::NEWS_COUNT)
         ->get();
 
-        // Сохраняем список в свойстве класса
+        // Сохраняем список новостей в свойстве класса
         self::$news = $result;
         
         return $result;
