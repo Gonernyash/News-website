@@ -1,5 +1,5 @@
 const StateData = {
-    news: []
+    news: {}
 }
 
 export default StateData;

@@ -2,38 +2,31 @@ import "./NewsList.css";
 import NewsItem from "./NewsItem";
 import { useContext, useEffect } from "react";
 import ContextData from "./Context/Data/ContextData";
-import NET from "./network";
+import fetchNews from "./ajax/fetchNews";
 
 function NewsList() {
     const {stateData, dispatchData} = useContext(ContextData);
 
-    useEffect(()=> {
-        try {
-            const fetchNews = async () => {
-                const res = await fetch(`${NET.APP_URL}/news`);
-                if (res.status === 200) {
-                    const result = await res.json();
-                    dispatchData({
-                        type: "FETCH_NEWS",
-                        payload: result
-                    });
-                }
-            }
-            fetchNews();
-        } catch(e) {
-            console.log(e);
-        }
-    }, [])
+    useEffect(() => fetchNews('', 0, dispatchData), []);
 
     const handleData = (data) => {
+        const news = data.news;
         const result = [];
-        data.news.forEach(newsGroup => {
-            const groupName = <h5>{newsGroup.date}</h5>;
-            result.push(groupName);
-            newsGroup.news.forEach(item => {
-                result.push(<NewsItem text={item.text} img={item.img_url} time={item.time} />);
-            })
-        });
+        for (let postDate in news) {
+            result.push(<h3 key={postDate + '-h'}>{postDate}</h3>);
+            result.push(<hr key={postDate + '-hr'} />);
+            news[postDate].forEach((item, i) => {
+                result.push(
+                    <NewsItem 
+                        key={postDate + '-post-' + i} 
+                        text={item.text} 
+                        img={item.img_url} 
+                        time={item.time} 
+                    />
+                );
+            });
+        }
+       
         return result;
     }
     
