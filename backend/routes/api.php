@@ -27,4 +27,7 @@ use App\Http\Controllers\NewsController;
 //     return $news;
 // });
 
-Route::get('news', [NewsController::class, 'getNews']);
+Route::get('news', function(Request $request) {
+    NewsController::get($request); 
+    return NewsController::groupBy('date');
+});
