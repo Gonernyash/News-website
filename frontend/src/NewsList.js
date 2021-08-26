@@ -13,8 +13,7 @@ function NewsList() {
         const news = data.news;
         const result = [];
         for (let postDate in news) {
-            result.push(<h3 key={postDate + '-h'}>{postDate}</h3>);
-            result.push(<hr key={postDate + '-hr'} />);
+            result.push(<h3 className="news-list__group" key={postDate}><time>{postDate}</time></h3>);
             news[postDate].forEach((item, i) => {
                 result.push(
                     <NewsItem 

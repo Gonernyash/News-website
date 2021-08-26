@@ -7,7 +7,7 @@ function NewsItem(props) {
                 {props.text}
             </p>
             <img className="news-item__img" src={props.img} alt=""></img>
-            <div className="news-item__time">{props.time}</div>
+            <div className="news-item__time"><time>{props.time}</time></div>
         </div>
     );
 }

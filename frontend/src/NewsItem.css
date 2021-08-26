@@ -1,0 +1,29 @@
+.news-item {
+    border-bottom: 1px solid #DDDDDD;
+    padding: 0 15px 15px 15px;
+}
+
+.news-item__text {
+    padding-right: 13%;
+    padding-left: 13%;
+}
+
+.news-item__img {
+    max-width: 100%;
+    margin: 10px auto;
+    border: 1px solid #000000;
+    border-radius: 20px;
+}
+
+.news-item__time {
+    padding-right: 13%;
+    padding-left: 13%;
+    text-align: right;
+}
+
+.news-item__time > time {
+    background-color: #DDDDDD;
+    border: 1px solid #000000;
+    border-radius: 7px;
+    padding: 2px 7px;
+}

@@ -6,7 +6,7 @@ async function fetchNews(req, page, dispatch) {
         if (res.status === 200) {
             const result = await res.json();
             dispatch({
-                type: "FETCH_NEWS",
+                type: "REFETCH_NEWS",
                 payload: result
             });
         }

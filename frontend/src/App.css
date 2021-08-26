@@ -1,4 +1,8 @@
 .container {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
+  border-left: 1px solid #DDDDDD;
+  border-right: 1px solid #DDDDDD;
+  padding: 30px 0;
+  box-shadow: 0 -10px 25px #AAAAAA;
 }
