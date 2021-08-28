@@ -1,0 +1,13 @@
+.go-top-button {
+    width: 100px;
+    height: 100px;
+    color: #999999;
+    opacity: .4;
+    position: fixed;
+    bottom: 20px;
+    right: 50px;
+}
+
+.go-top-button:hover {
+    opacity: 1;
+}

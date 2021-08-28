@@ -5,6 +5,7 @@ import ContextData from './Context/Data/ContextData';
 import { useReducer } from 'react';
 import ReducerData from './Context/Data/ReducerData';
 import StateData from './Context/Data/StateData';
+import ScrollTopButton from './ScrollTopButton';
 
 function App() {
   const [stateData, dispatchData] = useReducer(ReducerData, StateData);
@@ -16,6 +17,7 @@ function App() {
           <NewsSearch />
           <NewsList />
         </ContextData.Provider>
+        <ScrollTopButton />
       </div>
     </div>
   );
