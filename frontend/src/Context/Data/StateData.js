@@ -1,5 +1,6 @@
 const StateData = {
-    news: {}
+    news: {},
+    searchRequest: ''
 }
 
 export default StateData;

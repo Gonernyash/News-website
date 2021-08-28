@@ -1,13 +1,16 @@
 import "./NewsList.css";
 import NewsItem from "./NewsItem";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ContextData from "./Context/Data/ContextData";
 import fetchNews from "./ajax/fetchNews";
 
 function NewsList() {
     const {stateData, dispatchData} = useContext(ContextData);
 
-    useEffect(() => fetchNews('', 0, dispatchData), []);
+    const [page, setPage] = useState(0);
+    
+    useEffect(() => fetchNews('', page, dispatchData, 'FETCH_NEWS'), [page]);
+    console.log('ads');
 
     const handleData = (data) => {
         const news = data.news;
@@ -25,14 +28,13 @@ function NewsList() {
                 );
             });
         }
-       
         return result;
     }
     
     return(
         <div className="news-list">
             {handleData(stateData)}
-            <button className="news-list__load">Загрузить больше</button>
+            <button className="news-list__load" onClick={() => setPage(page + 1)}>Загрузить больше</button>
         </div>
     );
 }
