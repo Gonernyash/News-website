@@ -9,8 +9,9 @@ function NewsList() {
 
     const [page, setPage] = useState(0);
     
-    useEffect(() => fetchNews('', page, dispatchData, 'FETCH_NEWS'), [page]);
-    console.log('ads');
+    useEffect(() => {
+        fetchNews(stateData.searchRequest, page, dispatchData, 'FETCH_NEWS');
+    }, [page]);
 
     const handleData = (data) => {
         const news = data.news;
