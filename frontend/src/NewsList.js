@@ -11,7 +11,7 @@ function NewsList() {
     
     useEffect(() => {
         fetchNews(stateData.searchRequest, page, dispatchData, 'FETCH_NEWS');
-    }, [page]);
+    }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const handleData = (data) => {
         const news = data.news;

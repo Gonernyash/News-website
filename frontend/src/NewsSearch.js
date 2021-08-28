@@ -4,7 +4,7 @@ import ContextData from "./Context/Data/ContextData";
 import "./NewsSearch.css" ;
 
 function NewsSearch() {
-    const {stateData, dispatchData} = useContext(ContextData);
+    const {dispatchData} = useContext(ContextData);
 
     const input = useRef(null);
 
