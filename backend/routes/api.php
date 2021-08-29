@@ -21,13 +21,11 @@ use App\Http\Controllers\NewsController;
 //     return $request->user();
 // });
 
-// Route::get('news', function() {
-
-//     $news = News::all();
-//     return $news;
-// });
-
 Route::get('news', function(Request $request) {
-    NewsController::get($request); 
-    return NewsController::groupBy('date');
+    // Читаем параметры GET-запроса
+    $req = strval($request->input('req')); // Текст для поиска : String
+    $page = intval($request->input('page')); // Номер страницы : Integer
+
+    NewsController::get($req, $page); 
+    return NewsController::groupDataBy('date');
 });

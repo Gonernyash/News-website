@@ -15,11 +15,7 @@ class NewsController extends Controller
     public static $news = [];
 
     // Извлечение новостей из БД
-    public static function get(Request $request) {
-        // Читаем параметры GET-запроса
-        $req = $request->input('req'); // Текст для поиска
-        $page = $request->input('page'); // Страница
-        
+    public static function get(String $req, Int $page) {
         // Выполняем вычисления
         $skip = self::NEWS_COUNT * $page; // Количество записей, которое необходимо пропустить
 
@@ -30,7 +26,7 @@ class NewsController extends Controller
         WHERE `text` like %$req%
         ORDER BY post_date DESC
         OFFSET $skip
-        LIMIT $self::NEWS_COUNT
+        LIMIT self::NEWS_COUNT
         */
 
         $dateF = self::DATE_FORMAT;
@@ -51,7 +47,7 @@ class NewsController extends Controller
     }
 
     // Группировка новостей по свойству $prop 
-    public static function groupBy(String $prop) {
+    public static function groupDataBy(String $prop) {
         return self::$news
         ->groupBy(function($item) use ($prop) {
             return $item->$prop;
